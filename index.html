@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Documento</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #result {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .allowed {
+      color: green;
+    }
+    .denied {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+    <div class="tudo">
+        <img src="img/channels4_profile-removebg-preview.png" alt="">
+        <h1>Controle de Acesso</h1> 
+        <label for="cardNumber">Informe o número do Cartão de Identificação:</label>
+        <input type="number" id="cardNumber" />
+        <button onclick="checkAccess()">Acessar</button>
+        <div id="result"></div>
+    </div>
+  <script>
+    function checkAccess() {
+      const cardNumber = parseInt(document.getElementById("cardNumber").value);
+      let message = "";
+      
+      if (cardNumber >= 1000 && cardNumber <= 1999) {
+        message = "Acesso total concedido.";
+        setResult("allowed");
+      } 
+      else if (cardNumber >= 2000 && cardNumber <= 2999) {
+        message = "Acesso limitado concedido.";
+        setResult("allowed");
+      } 
+      else if (cardNumber > 3000) {
+        message = "Acesso negado.";
+        setResult("denied");
+      } 
+      else {
+        message = "Número de cartão inválido.";
+        setResult("");
+      }
+      
+      document.getElementById("result").innerText = message;
+    }
+
+    function setResult(status) {
+      const resultElement = document.getElementById("result");
+      resultElement.classList.remove("allowed", "denied");
+      
+      if (status === "allowed") {
+        resultElement.classList.add("allowed");
+      } 
+      else if (status === "denied") {
+        resultElement.classList.add("denied");
+      }
+    }
+  </script>
+</body>
+</html>
